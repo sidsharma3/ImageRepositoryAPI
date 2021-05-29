@@ -28,11 +28,6 @@ const submissionSchema = new mongoose.Schema(
             min: 200,
             max: 2000000
         },
-        feedback: {
-            type: {},
-            min: 20,
-            max: 2000000
-        },
         excerpt: {
             type: String,
             max: 1000

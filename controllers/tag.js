@@ -33,19 +33,17 @@ exports.list = (req, res) => {
 
 exports.read = (req, res) => {
     const slug = req.params.slug.toLowerCase();
-
     Tag.findOne({ slug }).exec((err, tag) => {
         if (err) {
             return res.status(400).json({
                 error: 'Tag not found'
             });
         }
-        // res.json(tag);
         Submission.find({ tags: tag })
             .populate('categories', '_id name slug')
             .populate('tags', '_id name slug')
             .populate('postedBy', '_id name')
-            .select('_id title slug excerpt categories postedBy tags createdAt updatedAt')
+            .select('_id title fileID fileName slug excerpt categories postedBy tags createdAt updatedAt')
             .exec((err, data) => {
                 if (err) {
                     return res.status(400).json({

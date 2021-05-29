@@ -58,7 +58,7 @@ exports.create = (req, res) => {
             });
         }
 
-        const { title, body, categories, tags, feedback } = fields;
+        const { title, body, categories, tags } = fields;
 
         if (!title || !title.length) {
             return res.status(400).json({
@@ -85,14 +85,9 @@ exports.create = (req, res) => {
         }
 
         let submission = new Submission();
-        
-        if (feedback) {
-            submission.feedback = feedback;
-        }
 
         submission.title = title;
         submission.body = body;
-        submission.feedback = feedback;
         submission.excerpt = smartTrim(body, 320, ' ', ' ...');
         submission.slug = slugify(title).toLowerCase();
         submission.mtitle = `${title} | ${process.env.APP_NAME}`;
@@ -195,7 +190,7 @@ exports.read = (req, res) => {
         .populate('categories', '_id name slug')
         .populate('tags', '_id name slug')
         .populate('postedBy', '_id name username')
-        .select('_id title body feedback fileID fileName slug mtitle mdesc categories tags postedBy createdAt updatedAt')
+        .select('_id title body fileID fileName slug mtitle mdesc categories tags postedBy createdAt updatedAt')
         .exec((err, data) => {
             if (err) {
                 return res.json({
@@ -247,7 +242,7 @@ exports.update = (req, res) => {
             oldSubmission = _.merge(oldSubmission, fields);
             oldSubmission.slug = slugBeforeMerge;
 
-            const { body, desc, categories, tags, feedback } = fields;
+            const { body, desc, categories, tags } = fields;
 
             if (body) {
                 oldSubmission.excerpt = smartTrim(body, 320, ' ', ' ...');
