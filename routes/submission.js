@@ -13,7 +13,6 @@ router.post('/submissions-categories-tags', listAllSubmissionsCategoriesTags);
 router.get('/submission/:slug', read);
 router.delete('/submission/:slug', requireSignin, adminMiddleware, remove);
 router.put('/submission/:slug', requireSignin, adminMiddleware, update);
-router.get('/submission/photo/:slug', photo);
 router.post('/submissions/related', listRelated);
 router.get('/submissions/search', listSearch);
 
