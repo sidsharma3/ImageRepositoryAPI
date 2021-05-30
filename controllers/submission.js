@@ -12,9 +12,9 @@ const { smartTrim } = require('../helpers/submission');
 var cloudinary = require('cloudinary').v2;
 
 cloudinary.config({
-    cloud_name: 'dlgtho53p',
-    api_key: '433946476562715',
-    api_secret: '5H2EnZTV4KZLa6SQepZqLtQ-as8'
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
 function saveSubmission(submission, arrayOfCategories, arrayOfTags, res) {

@@ -3,7 +3,7 @@ const { sendEmailWithNodemailer } = require("../helpers/email");
 exports.contactForm = (req, res) => {
     const {email, name, message} = req.body
     const emailData = {
-        from: "sidsharma.ab@gmail.com", 
+        from: process.env.EMAIL_FROM, 
         to: email, 
         subject: "Website Contact Form",
         text: `Email received from contact from \n Sender name: ${name} \n Sender email: ${email} \n Sender message: ${message}`,

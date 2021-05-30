@@ -3,16 +3,16 @@ const nodeMailer = require("nodemailer");
  
 exports.sendEmailWithNodemailer = (req, res, emailData) => {
   const transporter = nodeMailer.createTransport({
-    host: "smtp.gmail.com",
+    host: process.env.EMAIL_HOST,
     port: 587,
     secure: false,
     requireTLS: true,
     auth: {
-      user: "sidsharma.ab@gmail.com", 
-      pass: "xlaahuckmzrujsth", 
+      user: process.env.EMAIL_FROM, 
+      pass: process.env.EMAIL_PASS, 
     },
     tls: {
-      ciphers: "SSLv3",
+      ciphers: process.env.CIPHERS,
     },
   });
  

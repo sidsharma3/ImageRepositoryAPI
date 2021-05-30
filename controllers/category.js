@@ -43,7 +43,7 @@ exports.read = (req, res) => {
         Submission.find({ categories: category })
             .populate('categories', '_id name slug')
             .populate('tags', '_id name slug')
-            .populate('postedBy', '_id name')
+            .populate('postedBy', '_id username profile name')
             .select('_id title fileID fileName slug excerpt categories postedBy tags createdAt updatedAt')
             .exec((err, data) => {
                 if (err) {
